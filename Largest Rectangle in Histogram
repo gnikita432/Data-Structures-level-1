@@ -1,0 +1,69 @@
+//Largest Area Histogram
+
+//Given an array of integers heights representing the histogram's bar height where the width of each bar is 1, return the area of the largest rectangle in the histogram.
+
+
+class Solution {
+    public int largestRectangleArea(int[] heights) {
+        
+        //next smaller element in left
+        Stack <Integer> nsel = new Stack();
+        int [] left = new int[heights.length];
+        
+        nsel.push(0);
+        left[0]=-1;
+        
+        for(int i = 0 ;i<left.length;i++){
+            while(nsel.size()>0 && heights[i]<=heights[nsel.peek()]){
+                nsel.pop();
+            }
+            if(nsel.size()==0){
+                left[i]=-1;
+            }
+            else{
+                left[i]=nsel.peek();
+            }
+            nsel.push(i);
+        }
+        
+      
+        //next smaller element in right
+        Stack <Integer> nser = new Stack();
+        int [] right = new int[heights.length];
+        
+        nser.push(heights.length-1);
+        right[0]=heights.length;
+        
+        for(int i = heights.length-1 ;i>=0;i--){
+            while(nser.size()>0 && heights[i]<=heights[nser.peek()]){
+                nser.pop();
+            }
+            if(nser.size()==0){
+                right[i]=heights.length;
+            }
+            else{
+                right[i]=nser.peek();
+            }
+            nser.push(i);
+        }
+
+        
+        //Area 
+        int width=0;
+        int area=0;
+        int maxArea=0;
+        for(int i = 0; i<heights.length;i++){
+           width = (right[i]-left[i])-1;
+            area = heights[i]*width;
+            if(area>maxArea){
+                maxArea=area;
+            }
+        }
+        
+        return maxArea;
+    }
+}
+
+//Sample input/output
+//Input: heights = [2,1,5,6,2,3]
+//Output: 10
