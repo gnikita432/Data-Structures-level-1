@@ -86,7 +86,8 @@ class solution {
     }
 }
 
-//Sample Input
-//2 + 6 * 4 / 8 - 3
-//Sample Output
-//2
+/* Sample Input
+2 + 6 * 4 / 8 - 3
+
+Sample Output
+2 */
