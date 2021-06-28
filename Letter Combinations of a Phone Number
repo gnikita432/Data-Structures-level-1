@@ -1,0 +1,52 @@
+class Solution {
+
+  static String[] kpc = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+
+  public List<String> letterCombinations(String digits) {
+
+    //this written here and rest in getKPC function bcoz of 1 test case:
+    //if ""--> return [] not [""]
+    if (digits.equals(""))
+    {
+      ArrayList<String> b = new ArrayList<>();
+      return b;
+    }
+
+
+    List<String> ans = getKPC(digits);
+    return ans;
+  }
+
+  public List<String> getKPC(String digits) {
+    if (digits.length() == 0) {
+      List bres = new ArrayList<>();
+      bres.add("");
+      return bres;
+    }
+    char ch = digits.charAt(0);
+    String s = digits.substring(1);
+
+    List <String> res = getKPC(s);
+
+    List mres = new ArrayList<>();
+
+    String code = kpc[ch - '0'];
+
+    for (int i = 0 ; i < code.length(); i++) {
+      char c = code.charAt(i);
+
+      for (String ans : res) {
+        mres.add(c + ans);
+      }
+    }
+
+    return mres;
+
+  }
+}
+
+//Input: digits = "2"
+//Output: ["a","b","c"]
+
+//Input: digits = ""
+//Output: []
