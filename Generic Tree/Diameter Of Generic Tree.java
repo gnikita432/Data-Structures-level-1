@@ -4,6 +4,7 @@ static int dia = 0;
 private static int diameter(Node node) {
   int ht = -1;
   int sh = -1;
+  
   for (Node child : node.children) {
     int ch = diameter(child);
     if (ch >= ht) {
